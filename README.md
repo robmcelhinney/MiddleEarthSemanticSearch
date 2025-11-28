@@ -4,6 +4,8 @@
 
 A serverless, client-side AI search engine that allows users to search J.R.R. Tolkien's _The Lord of the Rings_ trilogy using natural language concepts rather than just keywords.
 
+[Live Demo](https://robmcelhinney.com/MiddleEarthSemanticSearch/)
+
 ![Project Screenshot](assets/images/screenshot.png)
 
 ## ✨ Features
