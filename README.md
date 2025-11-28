@@ -31,9 +31,9 @@ This repository is split into two parts: the **Data Pipeline** (backend) and the
 
 - Node.js v18 or higher
 
-### 1. The Data Pipeline (Optional)
+### 1. The Data Pipeline
 
-_Only needed if you want to regenerate the `embeddings.json` file._
+Add your LOTR .txt files to `data-pipeline/books` then run this to generate the `embeddings.json` file.
 
 ```bash
 cd data-pipeline
@@ -41,6 +41,8 @@ npm install
 node generate-embeddings.js
 # This will generate a ~20MB embeddings.json file
 ```
+
+Move `embeddings.json` to `middle-earth-search/public`
 
 ### 2. The Web App
 
