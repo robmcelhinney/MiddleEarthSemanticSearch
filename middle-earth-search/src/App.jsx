@@ -49,7 +49,7 @@ export default function App() {
             setProgress('Unrolling Ancient Scrolls (Parsing Data)...');
             setDownloadProgress(100); // Keep bar full while processing JSON
             
-            const response = await fetch('/embeddings.json');
+            const response = await fetch('embeddings.json');
             dataRef.current = await response.json();
 
             setStatus('ready');
