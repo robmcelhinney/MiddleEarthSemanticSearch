@@ -1,0 +1,4 @@
+data-pipeline/books
+data-pipeline/node_modules/
+middle-earth-search/node_modules/
+middle-earth-search/public/embeddings.json
