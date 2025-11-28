@@ -161,6 +161,18 @@ const handleSearch = async () => {
           Unearth More Secrets
         </button>
       )}
+
+      <footer className="footer">
+        <p> 
+          <a 
+            href="https://github.com/robmcelhinney/MiddleEarthSemanticSearch/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            View Source in the Archives
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }
