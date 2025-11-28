@@ -9,6 +9,7 @@ const FILES = {
 }
 
 const OUTPUT_FILE = "embeddings.json"
+const BOOKS_DIR = "./books/" // <--- NEW: Define the path to the books folder
 
 async function generate() {
     // 1. Load the model once (it's heavy)
@@ -25,28 +26,34 @@ async function generate() {
     for (const [filename, bookTitle] of Object.entries(FILES)) {
         console.log(`\n📖 Reading ${bookTitle}...`)
 
+        // NEW: Construct the full path to the file
+        const fullPath = BOOKS_DIR + filename
+
         let rawText
         try {
-            rawText = fs.readFileSync(filename, "utf8")
+            // NEW: Read the file from the full path
+            rawText = fs.readFileSync(fullPath, "utf8")
         } catch (error) {
-            console.error(`❌ Error reading ${filename}. Skipping...`)
+            console.error(`❌ Error reading ${fullPath}. Skipping...`)
             continue
         }
 
         // Chunking logic
+        // We ensure we are splitting by paragraphs and filtering for minimum length
         const paragraphs = rawText
             .split(/\n\s*\n/)
             .map((p) => p.trim())
             .filter((p) => p.length > 50)
 
         console.log(
-            `   Found ${paragraphs.length} paragraphs. Generating vectors...`
+            `    Found ${paragraphs.length} paragraphs. Generating vectors...`
         )
 
         // Process paragraphs for this specific book
         for (let i = 0; i < paragraphs.length; i++) {
             const text = paragraphs[i]
 
+            // Generate the embedding vector
             const output = await extractor(text, {
                 pooling: "mean",
                 normalize: true,
@@ -55,7 +62,8 @@ async function generate() {
             allData.push({
                 id: globalId++,
                 text: text,
-                book: bookTitle, // <--- NEW: Now we know which book it's from!
+                book: bookTitle,
+                // Convert Float32Array to a standard JavaScript array for JSON serialization
                 vector: Array.from(output.data),
             })
 
